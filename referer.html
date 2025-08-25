@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Referrer Policy Redirect Test</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    button { margin: 8px; padding: 10px 15px; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Referrer Policy Redirect Test</h1>
+  <p>Bấm nút để redirect sang app Vercel và xem <code>Referer</code> mà server nhận được.</p>
+
+  <!-- Buttons for different policies -->
+  <button onclick="redirect('no-referrer')">no-referrer</button>
+  <button onclick="redirect('origin')">origin</button>
+  <button onclick="redirect('origin-when-cross-origin')">origin-when-cross-origin</button>
+  <button onclick="redirect('strict-origin-when-cross-origin')">strict-origin-when-cross-origin</button>
+  <button onclick="redirect('unsafe-url')">unsafe-url</button>
+  <button onclick="redirect('default')">default (trình duyệt mặc định)</button>
+
+  <script>
+    function redirect(policy) {
+      if (policy !== "default") {
+        document.referrerPolicy = policy;
+      }
+
+      // Thay URL này thành app vercel của bạn
+      const target = "https://your-app.vercel.app";
+
+      alert("Redirecting to: " + target + "\nPolicy: " + policy);
+      window.location.href = target + "?policy=" + policy;
+    }
+  </script>
+</body>
+</html>
